@@ -4,32 +4,48 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vitesse-Auto</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <header class=".site-header">
-        <label class="name">Vitesse-Auto</label>
-        <div class="logo">
+    <header id="site-header">
+        <label id="name">Vitesse-Auto</label>
+        <div id="logo">
             <a href="index.html"><img src="logo.png" alt="logo"></a>
         </div>    
-        <nav class="navbar">
-            <ul class="nav-list">
-                <li class="nav-item dropdown">
-                    <a href="#" class="dropbtn">Services</a>
-                    <div class="dropdown-content">
-                        <a href="#">Service 1</a>
-                        <a href="#">Service 2</a>
-                        <a href="#">Service 3</a>
+        <nav id="navbar">
+            <ul id="nav-list-left">
+                <li id="nav-item dropdown">
+                    <a href="#" id="dropbtn">Nos Voitures</a>
+                    <div id="dropdown-content">
+                        <a href="#">BMW</a>
+                        <a href="#">AUDI</a>
+                        <a href="#">VOLKSWAGEN</a>
                     </div>
                 </li>
-                <li class="nav-item" id="contact"><a href="#">Contact</a></li>
+                <li id="nav-item" id="contact"><a href="#">Contact</a></li>
             </ul>
+            <div id="nav-list-right">
+                <ul id="nav-conexion">
+                    <li id="nav-item" id="conexion"><a href="#">conexion</a></li>
+                    <li id="nav-item" id="s'inscrire"><a href="#">s'inscrire</a></li>
+                </ul>
+            </div>
         </nav>
+        <label for="user-name" id="user-name"></label>
     </header>
-    <main class="site-main">
+    <main id="site-main">
+        <div id="content">
+            <h2>Bienvenue sur notre site de vente des voitures</h2>
+            <div id="image-container1">
+                <img src="welcome.jpg" alt="Bienvenue Image" />
+            </div>
+            <div id="photo-section">
+                <p></p>
+            </div>
+        </div>
         
     </main>
-    <footer class="site-footer">
-        <p>&copy; 2025 Web site</p>
+    <footer id="site-footer">
+        <p>&copy; Contact</p>
     </footer>
     <script src="script.js"></script>
 </html>
