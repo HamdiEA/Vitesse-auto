@@ -12,10 +12,6 @@ html,body{
     height: 100%;
 }
 
-#site-header{
-    background-color: lightpink;
-}
-
 #navbar{
     display: flex;
     max-width: 100%;
