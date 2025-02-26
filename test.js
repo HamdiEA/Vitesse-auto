@@ -27,6 +27,6 @@ app.get('/get-ip-info', async (req, res) => {
 });
 
 //Écouter sur IPv4 uniquement pour éviter d’utiliser IPv6 par défaut (::1)
-app.listen(3000, '0.0.0.0', () => {
-    console.log('Server is running on port 3000');
+app.listen(5000, '0.0.0.0', () => {
+    console.log('Server is running on port 5000');
 });
