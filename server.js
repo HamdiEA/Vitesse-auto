@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
         req.headers['x-forwarded-for'] || 
         req.socket.remoteAddress || '';
 
-    // If the IP is IPv6-mapped IPv4 (e.g., ::ffff:192.168.1.1), extract the IPv4 part
+    // Si l'adresse IP est une IPv4 mappée en IPv6 (par exemple, ::ffff:192.168.1.1), extraire la partie IPv4
     if (user_ip.startsWith('::ffff:')) {
         user_ip = user_ip.replace('::ffff:', '');
     }
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     return res.json({ user_ip });
 });
 
-// Listen on IPv4 only to avoid defaulting to IPv6 (::1)
+// Écouter uniquement sur IPv4 pour éviter de passer par défaut à IPv6 (::1)
 app.listen(3000, '0.0.0.0', () => {
     console.log('Server is running on port 3000');
 });
