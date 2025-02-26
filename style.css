@@ -22,20 +22,8 @@ html,body{
 
 #logo {
     border-radius: 50%;
-    width: 50px; /* Adjust size as needed */
-    height: 50px; /* Adjust size as needed */
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px; /* Adjust spacing */
 }
 
-#logo img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-}
 
 #navbar-list-left, #navbar-list-right {
     margin-left: auto;
@@ -53,3 +41,4 @@ html,body{
     margin-left: 10px;
     font-weight: bold;
 }
+
