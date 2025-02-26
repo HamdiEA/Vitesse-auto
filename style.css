@@ -8,8 +8,12 @@ html,body{
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    color: #333;
+    background-color: rgb(45, 43, 43);
     height: 100%;
+}
+
+#text-content{
+    color: whitesmoke;
 }
 
 #navbar{
@@ -41,4 +45,3 @@ html,body{
     margin-left: 10px;
     font-weight: bold;
 }
-
