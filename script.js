@@ -17,3 +17,9 @@ document.getElementById('btn-confirmation').addEventListener('click', function(e
         alert('Veuillez remplir tous les champs.');
     }
 });
+
+let prix_audi_r8 = 500;
+let prix_bmw_m4 = 700;
+let prix_bmw_M8coupé = 900;
+let prix_bmw_serie4 = 800;
+let prix_VW_gti = 600;
