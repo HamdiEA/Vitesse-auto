@@ -1,5 +1,4 @@
 import http from "http";
-
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
@@ -37,7 +36,6 @@ const requestListener = async (req, res) => {
         res.writeHead(200);
         fs.createReadStream(filePath).pipe(res);
     } else {
-        // File not found, return 404
         res.writeHead(404, { "Content-Type": "text/plain" });
         res.end("404 Not Found");
     }
