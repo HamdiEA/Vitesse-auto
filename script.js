@@ -17,7 +17,7 @@ fetch('https://api64.ipify.org?format=json')
   })
   .then(response => response.json())
   .then(exchangeData => {
-    console.log('Exchange Rate Data:', exchangeData);
+    console.log('taux echange:', exchangeData);
   })
   .catch(error => {
     console.error('Error:', error);
