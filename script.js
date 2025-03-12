@@ -4,7 +4,7 @@ fetch('https://api64.ipify.org?format=json')
     const userIP = data.ip;
     console.log('User IP:', userIP);
     
-    return fetch(` https://ipapi.co/${userIP}/json/?key={insert key here`);
+    return fetch(` https://ipapi.co/${userIP}/json/?key={insert key here}`);
   })
   .then(response => response.json())
   .then(jsonData => {
