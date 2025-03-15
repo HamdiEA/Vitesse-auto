@@ -1,25 +1,48 @@
-import express from 'express';
+import http from "http";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
-const app = express();
+const host = "localhost";
+const port = 8000;
 
-app.use(express.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.get('/', (req, res) => {
-    let user_ip = 
-        req.headers['cf-connecting-ip'] || 
-        req.headers['x-real-ip'] || 
-        req.headers['x-forwarded-for'] || 
-        req.socket.remoteAddress || '';
+const requestListener = async (req, res) => {
+    let filePath = path.join(__dirname, req.url);
 
-    // Si l'adresse IP est une IPv4 mappée en IPv6 (par exemple, ::ffff:192.168.1.1), extraire la partie IPv4
-    if (user_ip.startsWith('::ffff:')) {
-        user_ip = user_ip.replace('::ffff:', '');
+    if (req.url === "/" || req.url === "/index.html") {
+        filePath = path.join(__dirname, "index.html");
     }
 
-    return res.json({ user_ip });
-});
+    if (fs.existsSync(filePath)) {
+        const ext = path.extname(filePath).toLowerCase();
 
-// Écouter uniquement sur IPv4 pour éviter de passer par défaut à IPv6 (::1)
-app.listen(3000, '0.0.0.0', () => {
-    console.log('Server is running on port 3000');
+        const contentTypes = {
+            ".html": "text/html",
+            ".css": "text/css",
+            ".js": "text/javascript",
+            ".jpg": "image/jpeg",
+            ".jpeg": "image/jpeg",
+            ".png": "image/png",
+            ".webp": "image/webp",
+            ".gif": "image/gif",
+        };
+
+        const contentType = contentTypes[ext] || "application/octet-stream";
+
+        res.setHeader("Content-Type", contentType);
+        res.writeHead(200);
+        fs.createReadStream(filePath).pipe(res);
+    } else {
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.end("404 Not Found");
+    }
+};
+
+const server = http.createServer(requestListener);
+
+server.listen(port, host, () => {
+    console.log(`Server is running on http://${host}:${port}`);
 });
