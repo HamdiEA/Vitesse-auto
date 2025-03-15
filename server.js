@@ -11,14 +11,14 @@ const __dirname = path.dirname(__filename);
 
 const requestListener = async (req, res) => {
     let filePath = path.join(__dirname, req.url);
-    
+
     if (req.url === "/" || req.url === "/index.html") {
         filePath = path.join(__dirname, "index.html");
     }
 
     if (fs.existsSync(filePath)) {
         const ext = path.extname(filePath).toLowerCase();
-        
+
         const contentTypes = {
             ".html": "text/html",
             ".css": "text/css",
