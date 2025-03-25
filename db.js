@@ -1,14 +1,18 @@
-
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-dotenv.config();
+import path from "path";
 
-const pool = mysql.createPool({
+// Load SQL environment variables
+dotenv.config({ path: path.resolve('./sql.env') });
+
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
 });
 
-export default pool;
+export default db;
