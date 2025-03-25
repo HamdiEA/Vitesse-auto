@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import dotenv from "dotenv";
-import db from "./db.js"; // Make sure this file exports a configured MySQL connection or pool
+import db from "./db.js";
 
 // Load SQL env variables
 dotenv.config({ path: path.resolve('./sql.env') });
