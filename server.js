@@ -14,11 +14,8 @@ const port = 8000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Main request handler
 const requestListener = async (req, res) => {
-    // -------------------------
-    // Handle API Routes
-    // -------------------------
+    // API Routes
     if (req.url === "/api/cars" && req.method === "GET") {
         try {
             const [rows] = await db.query("SELECT * FROM cars");
@@ -68,9 +65,7 @@ const requestListener = async (req, res) => {
         return;
     }
 
-    // -------------------------
-    // Serve Static Files
-    // -------------------------
+    //Static files
     let filePath = path.join(__dirname, req.url);
     if (req.url === "/" || req.url === "/index.html") {
         filePath = path.join(__dirname, "index.html");
