@@ -11,7 +11,7 @@ async function updatePrices() {
     const userIP = ipData.ip;
     console.log('User IP:', userIP);
 
-    const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/?key=BiWYbVxdYJrlKWvhz8pEZ92526fnTmArSZziMURyHJDtu5tJZ8`);
+    const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/?key=${key}`);
     const locationData = await locationResponse.json();
     console.log('Location Data:', locationData);
 
