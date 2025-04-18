@@ -7,19 +7,28 @@ const prixserie4 = 229;
 async function updatePrices() {
   try {
     const ipResponse = await fetch('https://api64.ipify.org?format=json');
-    const ipData = await ipResponse.json();
+    if (!ipResponse.ok) {
+      throw new Error('Check your internet connection' + ipResponse.statusText);
+    }
+    const ipData = ipResponse.json();
     const userIP = ipData.ip;
     console.log('User IP:', userIP);
 
     const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/?key=${key}`);
-    const locationData = await locationResponse.json();
+    if (!locationResponse.ok) {
+      throw new Error('Check your internet connection' + locationResponse.statusText);
+    }
+    const locationData = locationResponse.json();
     console.log('Location Data:', locationData);
 
     const currency = locationData.currency;
     console.log('Currency:', currency);
 
     const exchangeResponse = await fetch(`https://api.currencyapi.com/v3/latest?apikey=cur_live_ikQtRU8hewDkQaGUgfLs1zf1YSZubte7TIuovCll&currencies=${currency}&base_currency=EUR`);
-    const exchangeData = await exchangeResponse.json();
+    if (!exchangeResponse.ok) {
+      throw new Error('Check your internet connection' + exchangeResponse.statusText);
+    }
+    const exchangeData = exchangeResponse.json();
     console.log('Taux de change:', exchangeData);
 
     const currencyCode = Object.keys(exchangeData.data)[0]; // Get the currency code
