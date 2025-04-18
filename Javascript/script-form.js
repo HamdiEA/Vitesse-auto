@@ -1,25 +1,47 @@
-document.getElementById('btn-confirmation').addEventListener('click', function(event) {
-    event.preventDefault();  // Empêche la soumission traditionnelle du formulaire
+document.getElementById('btn-confirmation').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent traditional form submission
 
-    var nom = document.forms['rentalForm']['nom'].value;
-    var prenom = document.forms['rentalForm']['prenom'].value;
-    var email = document.forms['rentalForm']['email'].value;
-    var tel = document.forms['rentalForm']['tel'].value;
-    var dateDebut = document.forms['rentalForm']['date_debut'].value;
-    var duree = document.forms['rentalForm']['duree'].value;
-    var idVoiture = document.forms['rentalForm']['id_voiture'].value;
+    const form = document.forms['rentalForm'];
+    const nom = form['nom'].value.trim();
+    const prenom = form['prenom'].value.trim();
+    const email = form['email'].value.trim();
+    const tel = form['tel'].value.trim();
+    const dateDebut = form['date_debut'].value.trim();
+    const duree = form['duree'].value.trim();
+    const idVoiture = form['id_voiture'].value.trim();
 
     if (nom && prenom && email && tel && dateDebut && duree && idVoiture) {
-        alert('Merci ' + prenom + ' ' + nom + ' !\n' +
-              'Votre réservation est confirmée\n' +
-              'pour la voiture ID: ' + idVoiture);
+        alert(`Merci ${prenom} ${nom} !\nVotre réservation est confirmée\npour la voiture ID: ${idVoiture}`);
+        sendEmail(email, prenom, nom, idVoiture); // Call sendEmail with relevant data
     } else {
         alert('Veuillez remplir tous les champs.');
     }
 });
 
-let prix_audi_r8 = 500;
-let prix_bmw_m4 = 700;
-let prix_bmw_M8coupé = 900;
-let prix_bmw_serie4 = 800;
-let prix_VW_gti = 600;
+// Dynamically load the SMTP.js library
+(function loadSMTPJs() {
+    const script = document.createElement('script');
+    script.src = "https://smtpjs.com/v3/smtp.js";
+    document.head.appendChild(script);
+})();
+
+function sendEmail(email, prenom, nom, idVoiture) {
+    if (!window.Email) {
+        alert("SMTP.js library not loaded. Unable to send email.");
+        return;
+    }
+
+    Email.send({
+        Host: "smtp.your-email-provider.com", // Replace with your SMTP host
+        Username: "your-email@example.com", // Replace with your email
+        Password: "your-email-password", // Replace with your email password (use environment variables or secure storage)
+        To: email,
+        From: "your-email@example.com", // Replace with your email
+        Subject: "Confirmation de réservation",
+        Body: `Bonjour ${prenom} ${nom},<br><br>Votre réservation pour la voiture ID: ${idVoiture} a été confirmée.<br><br>Merci de nous faire confiance !`
+    }).then(function () {
+        alert("Email envoyé avec succès !");
+    }).catch(function (error) {
+        alert("Erreur lors de l'envoi de l'email : " + error);
+    });
+}
