@@ -32,11 +32,11 @@ function sendEmail(email, prenom, nom, idVoiture) {
     }
 
     Email.send({
-        Host: "smtp.your-email-provider.com", // Replace with your SMTP host
-        Username: "your-email@example.com", // Replace with your email
-        Password: "your-email-password", // Replace with your email password (use environment variables or secure storage)
+        Host: "gmail.com", // Replace with your SMTP host
+        Username: "vitesseautolp@gmail.com", // Replace with your email
+        Password: "T;\[D/w6}8fvQU@A", // Replace with your email password (use environment variables or secure storage)
         To: email,
-        From: "your-email@example.com", // Replace with your email
+        From: "vitesseautolp@gmail.com", // Replace with your email
         Subject: "Confirmation de réservation",
         Body: `Bonjour ${prenom} ${nom},<br><br>Votre réservation pour la voiture ID: ${idVoiture} a été confirmée.<br><br>Merci de nous faire confiance !`
     }).then(function () {
