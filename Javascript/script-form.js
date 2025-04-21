@@ -1,17 +1,13 @@
-import { sendEmail } from '../Javascript/sendEmailFunction.js';
-
-document.getElementById('btn-confirmation').addEventListener('click', function (event) {
-    event.preventDefault();
-
-    const form = document.forms['rentalForm'];
-    const nom = form['nom'].value.trim();
-    const prenom = form['prenom'].value.trim();
-    const email = form['email'].value.trim();
-
-    if (nom && prenom && email && tel && dateDebut && duree && idVoiture) {
-        alert(`Merci ${prenom} ${nom} !\nVotre réservation est confirmée`);
-        sendEmail(email, prenom, nom); // Call sendEmail with relevant data
-    } else {
-        alert('Veuillez remplir tous les champs.');
+function sendMail(){
+    parms = {
+        nom : document.getElementById("nom").value,
+        email : document.getElementById("email").value,
     }
-});
+    
+    console.log(parms);
+
+    emailjs.send("service_kagci7q", "template_5obibh4", parms).then(alert("Votre message a bien été envoyé !"), function(error) {
+        alert("Erreur lors de l'envoi du message : " + error);
+    }
+    );
+}
