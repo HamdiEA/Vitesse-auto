@@ -7,20 +7,11 @@ document.getElementById('btn-confirmation').addEventListener('click', function (
     const nom = form['nom'].value.trim();
     const prenom = form['prenom'].value.trim();
     const email = form['email'].value.trim();
-    const tel = form['tel'].value.trim();
-    const dateDebut = form['date_debut'].value.trim();
-    const duree = form['duree'].value.trim();
-    const idVoiture = form['id_voiture'].value.trim();
 
     if (nom && prenom && email && tel && dateDebut && duree && idVoiture) {
-        alert(`Merci ${prenom} ${nom} !\nVotre réservation est confirmée\npour la voiture ID: ${idVoiture}`);
+        alert(`Merci ${prenom} ${nom} !\nVotre réservation est confirmée`);
         sendEmail(email, prenom, nom); // Call sendEmail with relevant data
     } else {
         alert('Veuillez remplir tous les champs.');
     }
 });
-
-function sendEmail(email, prenom, nom) {
-    const emailBody = `Thank you ${prenom} ${nom} for your reservation.\n`;
-    sendEmail(user.Email, emailSubject, emailBody);
-}
