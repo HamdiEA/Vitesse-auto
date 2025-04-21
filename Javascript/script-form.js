@@ -1,3 +1,5 @@
+import { sendEmail } from '../Javascript/sendEmailFunction.js';
+
 document.getElementById('btn-confirmation').addEventListener('click', function (event) {
     event.preventDefault();
 
@@ -12,9 +14,13 @@ document.getElementById('btn-confirmation').addEventListener('click', function (
 
     if (nom && prenom && email && tel && dateDebut && duree && idVoiture) {
         alert(`Merci ${prenom} ${nom} !\nVotre réservation est confirmée\npour la voiture ID: ${idVoiture}`);
-        sendEmail(email, prenom, nom, idVoiture); // Call sendEmail with relevant data
+        sendEmail(email, prenom, nom); // Call sendEmail with relevant data
     } else {
         alert('Veuillez remplir tous les champs.');
     }
 });
 
+function sendEmail(email, prenom, nom) {
+    const emailBody = `Thank you ${prenom} ${nom} for your reservation.\n`;
+    sendEmail(user.Email, emailSubject, emailBody);
+}

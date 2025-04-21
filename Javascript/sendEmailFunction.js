@@ -4,8 +4,6 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-// Verify environment variables
-
 // Configure your SMTP transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
