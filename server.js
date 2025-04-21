@@ -12,8 +12,8 @@ const __dirname = path.dirname(__filename);
 const requestListener = async (req, res) => {
     let filePath = path.join(__dirname, req.url);
 
-    if (req.url === "/" || req.url === "/index.html") {
-        filePath = path.join(__dirname, "index.html");
+    if (req.url === "/" || req.url === "/html/index.html") {
+        filePath = path.join(__dirname, "/html/index.html");
     }
 
     if (fs.existsSync(filePath)) {
