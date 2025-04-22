@@ -13,6 +13,7 @@ async function updatePrices() {
     console.log('User IP:', userIP);
 
     // Get location info using IP address
+  
     const locationResponse = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=bd57c90ff4f3451c8a9ae1ab99947b9b=${userIP}`);
     const locationData = await locationResponse.json();
     console.log('Location Data:', locationData);
