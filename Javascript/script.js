@@ -13,8 +13,7 @@ async function updatePrices() {
     console.log('User IP:', userIP);
 
     // Get location info using IP address
-  
-    const locationResponse = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=bd57c90ff4f3451c8a9ae1ab99947b9b=${userIP}`);
+    const locationResponse = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=bd57c90ff4f3451c8a9ae1ab99947b9b&ip=${userIP}`);
     const locationData = await locationResponse.json();
     console.log('Location Data:', locationData);
 
@@ -26,7 +25,7 @@ async function updatePrices() {
     }
 
     // Get exchange rate for user's currency
-    const exchangeResponse = await fetch(`https://api.currencyapi.com/v3/latest?apikey=${APIKEY}&currencies=${currency}&base_currency=EUR`);
+    const exchangeResponse = await fetch(`https://api.currencyapi.com/v3/latest?apikey=cur_live_ikQtRU8hewDkQaGUgfLs1zf1YSZubte7TIuovCll&currencies=${currency}&base_currency=EUR`);
     const exchangeData = await exchangeResponse.json();
     console.log('Taux de change:', exchangeData);
 
