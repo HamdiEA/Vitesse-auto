@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "HvE8SvGDnFr18pKFM",
+            });
+        })();
+    </script>
+    <script src="../Javascript/script-form.js"></script>
+    <title>Location</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark"> 
+            <div class="container">
+                <img src="/images/logo.png" alt="" class="navbar-brand" width="80px" height="80px" id="logo">
+                <a href="/html/index.html" class="navbar-brand">Vitesse-Auto</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navmenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a href="/html/bmw.html" class="nav-link">BMW</a></li>
+                        <li class="nav-item"><a href="/html/Audi.html" class="nav-link">AUDI</a></li>
+                        <li class="nav-item"><a href="/html/vw.html" class="nav-link">VOLKSWAGEN</a></li>
+                        <li class="nav-item"><a href="/html/contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+    <div class="container mt-5">
+        <div id="form" class="container my-5">
+            <h1 class="text-center" id="title">Location</h1>
+            <p class="text-center" id="paragraphe">Veuillez remplir le formulaire ci-dessous pour louer une voiture</p>
+            <hr>
+            <form name="rentalForm" id ="rentalForm">
+                <i class="fa-solid fa-user"></i>&nbsp;
+                <label for="">Nom</label>
+                <input type="text" name="nom" placeholder="Nom" class="form-control my-2" id="nom">
+                <i class="fa-solid fa-user"></i>&nbsp;
+                <label for="">Prénom</label>
+                <input type="text" name="prenom" placeholder="Prénom" class="form-control my-2" id="prenom">
+                <i class="fas fa-envelope"></i>&nbsp;
+                <label for="">Email</label>
+                <input type="email" name="email" placeholder="Email" class="form-control my-2" id="email">
+                <i class="fa-solid fa-phone"></i>&nbsp;
+                <label for="">Téléphone</label>
+                <input type="tel" name="tel" placeholder="Téléphone" class="form-control my-2">
+                <i class="fa-solid fa-calendar-days"></i>&nbsp;
+                <label for="">date de début</label>
+                <input type="date" name="date_debut" class="form-control my-2">
+                <i class="fa-solid fa-hashtag"></i>&nbsp;
+                <label for="">Durée (en jours)</label>
+                <input type="number" name="duree" class="form-control my-2">
+                <i class="fa-solid fa-key"></i>&nbsp;
+                <label for="">Identifiant du voiture</label>
+                <input type="text" name="id_voiture" placeholder="Id du voiture" class="form-control my-2">
+                <input type="submit" value="Confirmer" class="btn btn-primary my-2" id="btn-confirmation" onclick="sendMail() ">
+            </form>
+        </div>
+    </div>
+    </main>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy;2025 Vitesse-Auto - Tous droits réservés. </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
