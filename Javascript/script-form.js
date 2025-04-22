@@ -6,8 +6,15 @@ function sendMail(){
     
     console.log(parms);
 
-    emailjs.send("service_kagci7q", "template_5obibh4", parms).then(alert("Votre message a bien été envoyé !"), function(error) {
-        alert("Erreur lors de l'envoi du message : " + error);
-    }
-    );
+    emailjs.send("service_kagci7q", "template_5obibh4", parms)
+        .then(
+            function(_response) {
+                console.log("SUCCESS!");
+                alert("Votre message a bien été envoyé !");
+                document.location = "http://localhost:8000/html/index.html";
+            },
+            function(error) {
+                alert("Erreur lors de l'envoi du message : " + error);
+            }
+        );
 }
