@@ -13,13 +13,5 @@ export const handleCarRoutes = async (req, res, db) => {
       return true;
   }
 
-  if (req.url === "/api/cars/unavailable" && req.method === "POST") {
-      const { model } = req.body;
-      const [result] = await db.query("UPDATE cars SET V_Dispo = 0 WHERE model = ?", [model]);
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ affected: result.affectedRows }));
-      return true;
-  }
-
   return false;
 };

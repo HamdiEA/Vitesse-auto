@@ -16,13 +16,20 @@ document.addEventListener("DOMContentLoaded", async function () {
   let taux = 1;
 
   try {
+    // Fetch IP address
     const ipRes = await fetch('https://api64.ipify.org?format=json');
+    if (!ipRes.ok) throw new Error('Failed to fetch IP address');
     const ipData = await ipRes.json();
+
+    // Fetch location data
     const locRes = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=bd57c90ff4f3451c8a9ae1ab99947b9b&ip=${ipData.ip}`);
+    if (!locRes.ok) throw new Error('Failed to fetch location data');
     const locData = await locRes.json();
     currency = locData.currency?.code || "EUR";
 
+    // Fetch currency exchange rate
     const exRes = await fetch(`https://api.currencyapi.com/v3/latest?apikey=cur_live_ikQtRU8hewDkQaGUgfLs1zf1YSZubte7TIuovCll&currencies=${currency}&base_currency=EUR`);
+    if (!exRes.ok) throw new Error('Failed to fetch currency exchange rate');
     const exData = await exRes.json();
     taux = exData.data[currency]?.value || 1;
   } catch (e) {
@@ -36,24 +43,37 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const louerBtn = document.getElementById("btn-forum");
   if (louerBtn && louerBtn.parentNode) {
-    louerBtn.style.visibility = "hidden";  // hide button until ready
+    // Hide the button initially
+    louerBtn.style.visibility = "hidden";
     louerBtn.parentNode.insertBefore(priceElement, louerBtn);
   }
 
-  const response = await fetch(`/api/car?model=${encodeURIComponent(modelName)}`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`/api/car?model=${encodeURIComponent(modelName)}`);
+    if (!response.ok) throw new Error('Failed to fetch car availability');
+    const data = await response.json();
 
-  if (data.available) {
-    louerBtn.classList.remove("btn-danger", "btn-secondary");
-    louerBtn.classList.add("btn-success");
-    louerBtn.disabled = false;
-    louerBtn.textContent = "Louer maintenant";
-  } else {
+    if (data.available) {
+      louerBtn.classList.remove("btn-danger", "btn-secondary");
+      louerBtn.classList.add("btn-success");
+      louerBtn.disabled = false;
+      louerBtn.textContent = "Louer maintenant";
+    } else {
+      louerBtn.disabled = true;
+      louerBtn.classList.remove("btn-primary", "btn-success");
+      louerBtn.classList.add("btn-danger");
+      louerBtn.textContent = "Non disponible";
+    }
+  } catch (e) {
+    console.error("Erreur de disponibilité de la voiture :", e);
     louerBtn.disabled = true;
     louerBtn.classList.remove("btn-primary", "btn-success");
     louerBtn.classList.add("btn-danger");
     louerBtn.textContent = "Non disponible";
   }
 
-  louerBtn.style.visibility = "visible"; // show button only once it's ready
+  // Show the button only after it's ready
+  if (louerBtn) {
+    louerBtn.style.visibility = "visible";
+  }
 });

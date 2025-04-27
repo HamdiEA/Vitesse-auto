@@ -3,9 +3,12 @@ import mysql from 'mysql2';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
+import http from 'http';
 
 const app = express();
-const PORT = 8000;
+const host = "localhost";
+const port = 8000;
 
 // ES module-friendly __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -13,9 +16,6 @@ const __dirname = path.dirname(__filename);
 
 // Enable CORS
 app.use(cors());
-
-// Serve everything from the root directory (HTML, JS, CSS, images, etc.)
-app.use(express.static(__dirname));
 
 // MySQL connection
 const db = mysql.createConnection({
@@ -46,21 +46,48 @@ app.get('/api/car', (req, res) => {
   });
 });
 
-// Serve index.html by default on root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'index.html'));
-});
+// Serve static files and handle requests
+const requestListener = async (req, res) => {
+  let filePath = path.join(__dirname, req.url);
 
-// 404 fallback for unknown paths
-app.use((req, res) => {
-  res.status(404).send(`
-    <h1>404 - Page Not Found</h1>
-    <p>The page or resource you requested does not exist.</p>
-    <a href="/html/index.html">Go to Home</a>
-  `);
-});
+  if (req.url === "/" || req.url === "/html/index.html") {
+    filePath = path.join(__dirname, "/html/index.html");
+  }
+
+  // Ensure the file path is valid and within the allowed directory
+  if (!filePath.startsWith(__dirname)) {
+    res.writeHead(403, { "Content-Type": "text/plain" });
+    res.end("403 Forbidden");
+    return;
+  }
+
+  if (fs.existsSync(filePath)) {
+    const ext = path.extname(filePath).toLowerCase();
+
+    const contentTypes = {
+      ".html": "text/html",
+      ".css": "text/css",
+      ".js": "text/javascript",
+      ".jpg": "image/jpeg",
+      ".jpeg": "image/jpeg",
+      ".png": "image/png",
+      ".webp": "image/webp",
+      ".gif": "image/gif",
+    };
+
+    const contentType = contentTypes[ext] || "application/octet-stream";
+
+    res.setHeader("Content-Type", contentType);
+    res.writeHead(200);
+    fs.createReadStream(filePath).pipe(res);
+  } else {
+    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.end("404 Not Found");
+  }
+};
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const server = http.createServer(requestListener);
+server.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
 });
