@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", async function () {
+
+  //Extracts the model name from the path of the html file
   const modelName = window.location.pathname.split("/").pop().replace(".html", "");
 
   // Local price lookup
+  //Each car model has a specific price
   const prixMap = {
     "BMW-M4": 259,
     "BMW-M8": 349,
@@ -10,10 +13,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     "bmwserie4": 229,
     "gti": 189
   };
+
   const prix = prixMap[modelName] || 0;
 
-  let currency = "EUR";
-  let taux = 1;
+  let currency = "EUR";// Default currency
+  let taux = 1;// Default exchange rate
 
   try {
     // Fetch IP address
@@ -25,13 +29,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     const locRes = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=bd57c90ff4f3451c8a9ae1ab99947b9b&ip=${ipData.ip}`);
     if (!locRes.ok) throw new Error('Failed to fetch location data');
     const locData = await locRes.json();
+    
     currency = locData.currency?.code || "EUR";
 
     // Fetch currency exchange rate
-    const exRes = await fetch(`https://api.currencyapi.com/v3/latest?apikey=cur_live_ikQtRU8hewDkQaGUgfLs1zf1YSZubte7TIuovCll&currencies=${currency}&base_currency=EUR`);
+    const exRes = await fetch(`https://api.currencyapi.com/v3/latest?apikey=cur_live_QnyNOtnqT8Dtxi3L8QlQquSJlNUFQKhwcrpOPQ0Q&currencies=${currency}&base_currency=EUR`);
     if (!exRes.ok) throw new Error('Failed to fetch currency exchange rate');
     const exData = await exRes.json();
-    taux = exData.data[currency]?.value || 1;
+    taux = exData.data[currency].value;
   } catch (e) {
     console.error("Erreur de localisation ou taux :", e);
   }

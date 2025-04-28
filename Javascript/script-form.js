@@ -11,10 +11,9 @@ function sendMail() {
       .then(async () => {
         alert("Votre message a bien été envoyé !");
         window.location.href = "/html/index.html";
-        await fetch(`/api/cars/unavailable=${encodeURIComponent(modelName)}`);
       })
       .catch((error) => {
         alert("Erreur lors de l'envoi du message : " + error);
       });
-  }
+}
   

@@ -48,6 +48,12 @@ app.get('/api/car', (req, res) => {
 
 // Serve static files and handle requests
 const requestListener = async (req, res) => {
+  // Let Express handle API routes
+  if (req.url.startsWith("/api")) {
+    app(req, res);
+    return;
+  }
+
   let filePath = path.join(__dirname, req.url);
 
   if (req.url === "/" || req.url === "/html/index.html") {
@@ -85,6 +91,9 @@ const requestListener = async (req, res) => {
     res.end("404 Not Found");
   }
 };
+
+// Serve static files
+//app.use(express.static(path.join(__dirname, 'html')));
 
 // Start the server
 const server = http.createServer(requestListener);
