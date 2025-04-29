@@ -2,7 +2,6 @@ function sendMail() {
     const parms = {
       nom: document.getElementById("nom").value,
       email: document.getElementById("email").value,
-      modelName: document.getElementById("model").value,
     };
   
     console.log(parms);

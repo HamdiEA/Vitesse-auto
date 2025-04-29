@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       louerBtn.classList.add("btn-success");
       louerBtn.disabled = false;
       louerBtn.textContent = "Louer maintenant";
+      louerBtn.addEventListener("click", function () {
+        window.location.href = `/html/forum.html`;
+      });
     } else {
       louerBtn.disabled = true;
       louerBtn.classList.remove("btn-primary", "btn-success");
