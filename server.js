@@ -22,7 +22,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '', // change if needed
-  database: 'car_rental'
+  database: 'voiture'
 });
 
 db.connect(err => {
